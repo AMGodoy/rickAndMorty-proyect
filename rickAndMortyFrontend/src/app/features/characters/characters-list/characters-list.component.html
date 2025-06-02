@@ -1,0 +1,50 @@
+<!-- Team -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <!-- Title -->
+  <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight">Rick And Morty</h2>
+    <p class="mt-1 text-gray-600">Characters</p>
+  </div>
+  <!-- End Title -->
+
+  <!-- Grid -->
+  <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+    @for (character of characterList; track $index) {
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+      <img class="rounded-lg size-20" [src]="character.image" [alt]="character.name">
+
+      <div class="grow">
+        <div>
+          <h3 class="font-medium text-gray-800">
+            {{character.name}}
+          </h3>
+          <p class="mt-1 text-xs uppercase text-gray-500">
+            {{character.status}} - {{character.species}}
+          </p>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-800">
+            Last Known Location:
+          </h3>
+          <p class="mt-1 text-xs uppercase text-gray-500">
+            {{character.lastKnownLocation}}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-medium text-gray-800">
+            First Seen In:
+          </h3>
+          <p class="mt-1 text-xs uppercase text-gray-500">
+            {{character.firstSeenIn}}
+          </p>
+        </div>
+        
+      </div>
+    </div>
+    }
+ 
+  </div>
+  <!-- End Grid -->
+</div>
+<!-- End Team -->
