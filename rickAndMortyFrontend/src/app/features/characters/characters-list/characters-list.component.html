@@ -1,15 +1,26 @@
-<!-- Team -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <!-- Title -->
+  
   <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
     <h2 class="text-2xl font-bold md:text-4xl md:leading-tight">Rick And Morty</h2>
     <p class="mt-1 text-gray-600">Characters</p>
   </div>
-  <!-- End Title -->
 
-  <!-- Grid -->
+  <div class="max-w-md mx-auto mb-10 lg:mb-14">
+    <app-search (searchEvent)="onSearchTerm($event)" />
+  </div>
+ 
+
+  @if (spinner) {
+  <app-spinner />
+  } @else if (characterList && characterList.length === 0) {
+    <div class="text-center text-gray-500">
+      <p>{{message}}</p>
+    </div>
+  } @else {
+  
   <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
     @for (character of characterList; track $index) {
+      <a [routerLink]="[ '/characters-detail', character.id]">
         <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
       <img class="rounded-lg size-20" [src]="character.image" [alt]="character.name">
 
@@ -39,12 +50,12 @@
             {{character.firstSeenIn}}
           </p>
         </div>
-        
+
       </div>
     </div>
+      </a>
+    
     }
- 
   </div>
-  <!-- End Grid -->
+  }
 </div>
-<!-- End Team -->

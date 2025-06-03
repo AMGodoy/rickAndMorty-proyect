@@ -15,7 +15,7 @@ export default [
                 loadComponent: () => import('./characters-list/characters-list.component').then((m)=>m.CharactersListComponent)
             },
             {
-                path:'characters-detail',
+                path:'characters-detail/:id',
                 title:'Characters Detail',
                 loadComponent: () => import('./characters-detail/characters-detail.component').then((m)=>m.CharactersDetailComponent)
             }
@@ -26,5 +26,6 @@ export default [
         redirectTo: 'characters',
         pathMatch: 'full',
     },
+
 ] as Routes;
     

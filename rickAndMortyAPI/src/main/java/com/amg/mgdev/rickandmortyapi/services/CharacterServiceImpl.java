@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.ByteArrayOutputStream;
+import java.net.URL;
 import java.util.stream.Collectors;
 
 import java.util.List;
@@ -65,6 +66,7 @@ public class CharacterServiceImpl implements CharacterService{
     private CharacterDTO mapToDto(Character character){
         CharacterDTO characterDTO = new CharacterDTO();
 
+        characterDTO.setId(character.getId());
         characterDTO.setName(character.getName());
         characterDTO.setImage(character.getImage());
         characterDTO.setStatus(character.getStatus());
@@ -97,14 +99,23 @@ public class CharacterServiceImpl implements CharacterService{
 
             document.add(new Paragraph(" ")); // Espacio en blanco
 
+            // Descargar y agregar la imagen
+            try {
+                Image image = Image.getInstance(new URL(character.getImage()));
+                image.scaleToFit(150, 150); // Escalar la imagen (editar a gusto)
+                image.setAlignment(Element.ALIGN_CENTER);
+                document.add(image);
+            } catch (Exception imgEx) {
+                // Si falla, agrega solo el texto de la URL
+                document.add(new Paragraph("Image: " + character.getImage()));
+            }
+
             // Contenido del personaje
             document.add(new Paragraph("Name: " + character.getName()));
             document.add(new Paragraph("Status: " + character.getStatus()));
             document.add(new Paragraph("Species: " + character.getSpecies()));
             document.add(new Paragraph("Last known location: " + character.getLastKnownLocation()));
             document.add(new Paragraph("First seen in: " + character.getFirstSeenIn()));
-
-            // Puedes agregar más datos si deseas
 
             document.close();
             return out.toByteArray();

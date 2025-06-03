@@ -1,1 +1,45 @@
-<p>characters-detail works!</p>
+<div class="p-6 max-w-md mx-auto font-sans antialiased">
+    <section class="block rounded-md border border-gray-300 p-4 shadow-sm sm:p-6">
+  <div class="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
+    <div class="sm:order-last sm:shrink-0">
+      <img
+        [alt]="characterDetail.name"
+        [src]="characterDetail.image"
+        class="size-16 rounded-full object-cover sm:size-[72px]"
+      />
+    </div>
+
+    <div class="mt-4 sm:mt-0">
+      <h3 class="text-lg font-medium text-pretty text-gray-900">
+        {{characterDetail.name}}
+      </h3>
+
+      <p class="mt-1 text-sm text-gray-700">{{characterDetail.status}} - {{characterDetail.species}}</p>
+
+      <div>
+          <h3 class="font-medium text-gray-800">
+            Last Known Location:
+          </h3>
+          <p class="mt-1 text-xs uppercase text-gray-500">
+            {{characterDetail.lastKnownLocation}}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-medium text-gray-800">
+            First Seen In:
+          </h3>
+          <p class="mt-1 text-xs uppercase text-gray-500">
+            {{characterDetail.firstSeenIn}}
+          </p>
+        </div>
+
+    </div>
+  </div>
+
+  <button (click)="downloadPdf(characterDetail.id)" class=" mt-6 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+  <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+  <span>Download Character Detail</span>
+</button>
+</section>
+</div>

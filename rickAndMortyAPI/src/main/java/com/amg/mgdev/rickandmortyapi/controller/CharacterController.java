@@ -36,18 +36,14 @@ public class CharacterController {
     }
 
     @GetMapping("/character/pdf")
-    public ResponseEntity<byte[]> getCharacterPdf(@RequestParam String name) {
-        List<CharacterDTO> characters = characterService.findByName(name);
-        if (characters.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<byte[]> getCharacterPdf(@RequestParam Integer id) {
+        CharacterDTO character = characterService.getCharacterById(id);
 
-        CharacterDTO dto = characters.get(0); // Solo el primero
-        byte[] pdfBytes = characterService.generateCharacterPdf(dto);
+        byte[] pdfBytes = characterService.generateCharacterPdf(character);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_PDF)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + dto.getName() + ".pdf")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + character.getName() + ".pdf")
                 .body(pdfBytes);
     }
 
